@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>成为老师！</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
     <style>
         body {
             margin: 0;
@@ -10,6 +12,10 @@
             flex-direction: column;
             align-items: center;
             background: #a0d8ef;
+			-webkit-user-select: none; /* Chrome, Safari */
+			-moz-user-select: none; /* Firefox */
+			-ms-user-select: none; /* Internet Explorer/Edge */
+			user-select: none; /* 标准写法 */
         }
         #info {
             font-size: 2vh;
@@ -69,6 +75,15 @@
     <button id="restart" onclick="location.reload()">重新开始</button>
 
 <script>
+	let lastTouchEnd = 0;
+	document.addEventListener('touchend', (event) => {
+	    const now = Date.now();
+	    if (now - lastTouchEnd <= 300) { // 300ms 内的双击
+	        event.preventDefault(); // 阻止默认缩放行为
+	    }
+	    lastTouchEnd = now;
+	}, false);
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const infoCount = document.getElementById('count');
