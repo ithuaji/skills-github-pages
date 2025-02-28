@@ -31,23 +31,30 @@
             background: #fff;
         }
         #controls {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .control-button {
-            font-size: 50px;
-            padding: 10px 20px;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .control-button:active {
-            background: #2980b9;
-        }
+        display: grid;
+        grid-template-areas:
+            ". up ."
+            "left . right"
+            ". down .";
+        gap: 10px;
+        margin-top: 10px;
+    }
+    .control-button {
+        font-size: 50px;
+        padding: 10px 20px;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .control-button:active {
+        background: #2980b9;
+    }
+    .control-button.up { grid-area: up; }
+    .control-button.down { grid-area: down; }
+    .control-button.left { grid-area: left; }
+    .control-button.right { grid-area: right; }
         #timer {
             position: absolute;
             top: 10px;
@@ -69,7 +76,7 @@
     </style>
 </head>
 <body>
-    <div id="info">已经成为学生妈妈：<span id="count">0</span>/38</div>
+    <div id="info">已驯服蜜蜂：<span id="count">0</span>/38</div>
     <div id="timer">剩余时间：60秒</div>
     <canvas id="gameCanvas"></canvas>
     <button id="restart" onclick="location.reload()">重新开始</button>
@@ -367,10 +374,10 @@ gameLoop();
 // 控制按钮脚本（保持不变）...
 </script>
 <div id="controls">
-    <button class="control-button" onmousedown="startMove('up')" onmouseup="stopMove()" ontouchstart="startMove('up')" ontouchend="stopMove()">⬆️</button>
-	<button class="control-button" onmousedown="startMove('down')" onmouseup="stopMove()" ontouchstart="startMove('down')" ontouchend="stopMove()">⬇️</button>
-    <button class="control-button" onmousedown="startMove('left')" onmouseup="stopMove()" ontouchstart="startMove('left')" ontouchend="stopMove()">⬅️</button>
-    <button class="control-button" onmousedown="startMove('right')" onmouseup="stopMove()" ontouchstart="startMove('right')" ontouchend="stopMove()">➡️</button>
+    <button class="control-button up" onmousedown="startMove('up')" onmouseup="stopMove()" ontouchstart="startMove('up')" ontouchend="stopMove()">⬆️</button>
+    <button class="control-button down" onmousedown="startMove('down')" onmouseup="stopMove()" ontouchstart="startMove('down')" ontouchend="stopMove()">⬇️</button>
+    <button class="control-button left" onmousedown="startMove('left')" onmouseup="stopMove()" ontouchstart="startMove('left')" ontouchend="stopMove()">⬅️</button>
+    <button class="control-button right" onmousedown="startMove('right')" onmouseup="stopMove()" ontouchstart="startMove('right')" ontouchend="stopMove()">➡️</button>
 </div>
 <script>
 let moveInterval;
